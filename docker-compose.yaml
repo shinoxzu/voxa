@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5173:80"
+  speaches-api:
+    image: ghcr.io/speaches-ai/speaches:latest-cpu
+    ports:
+      - "8002:8000"
+    environment:
+      - ALLOW_ORIGINS=["*"]
+    volumes:
+      - hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+    restart: unless-stopped
+volumes:
+  hf-hub-cache:
