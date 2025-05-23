@@ -1,4 +1,4 @@
-# voxa - conference summarizer
+# voxa - local web-conference summarizer
 
 ## how to run
 
