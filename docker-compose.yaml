@@ -1,16 +1,45 @@
 services:
-  app:
-    build: .
+  frontend:
+    build: ./frontend
     ports:
       - "5173:80"
-  speaches-api:
-    image: ghcr.io/speaches-ai/speaches:latest-cpu
+
+  backend:
+    build: ./backend
     ports:
-      - "8002:8000"
+      - "8000:8000"
     environment:
-      - ALLOW_ORIGINS=["*"]
+      - VOXA_DATABASE_URL=postgresql+asyncpg://voxa:voxa@db:5432/voxa
+      - VOXA_AUDIO_DIR=/data/audio
+      - VOXA_WHISPER_MODEL=large-v3
+      - VOXA_WHISPER_DEVICE=cpu
+      - VOXA_WHISPER_COMPUTE_TYPE=int8
+      - VOXA_HF_TOKEN=${VOXA_HF_TOKEN:-}
+      - VOXA_LLM_MODEL=${VOXA_LLM_MODEL:-openai:gpt-4o-mini}
+      - VOXA_YANDEX_TRACKER_TOKEN=${VOXA_YANDEX_TRACKER_TOKEN:-}
+      - VOXA_YANDEX_TRACKER_ORG_ID=${VOXA_YANDEX_TRACKER_ORG_ID:-}
     volumes:
-      - hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
-    restart: unless-stopped
+      - audio-data:/data/audio
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:17
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: voxa
+      POSTGRES_PASSWORD: voxa
+      POSTGRES_DB: voxa
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U voxa"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
 volumes:
-  hf-hub-cache:
+  pg-data:
+  audio-data:

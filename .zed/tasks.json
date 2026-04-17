@@ -1,0 +1,16 @@
+[
+  {
+    "label": "Backend (FastAPI)",
+    "command": "cd backend && uv run fastapi dev",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  },
+  {
+    "label": "Frontend (Vite)",
+    "command": "cd frontend && bun dev",
+    "use_new_terminal": true,
+    "allow_concurrent_runs": false,
+    "reveal": "always"
+  }
+]

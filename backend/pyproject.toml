@@ -1,0 +1,23 @@
+[project]
+name = "voxa-backend"
+version = "0.1.0"
+description = "Voxa backend — meeting analysis API"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+    "fastapi[standard]",
+    "sqlalchemy[asyncio]",
+    "asyncpg",
+    "python-multipart",
+    "whisperx==3.8.5",
+    "pydantic-ai",
+    "httpx",
+    "pydantic-settings",
+    "dishka",
+    "alembic",
+]
+
+[dependency-groups]
+dev = [
+    "ruff",
+    "ty",
+]
