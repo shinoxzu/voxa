@@ -48,3 +48,27 @@ class WhisperXTranscriber(Transcriber):
             Segment(start=seg["start"], end=seg["end"], text=seg["text"].strip())
             for seg in aligned["segments"]
         ]
+
+
+class WhisperCppTranscriber(Transcriber):
+    """Транскрайбер на whisper.cpp — поддерживает Metal (Mac) и CUDA через pywhispercpp."""
+
+    def __init__(self, settings: Settings) -> None:
+        from pywhispercpp.model import Model
+
+        self._model = Model(
+            settings.whisper_model,
+            n_threads=4,
+            print_progress=False,
+            print_realtime=False,
+        )
+
+    def transcribe(self, audio_path: str) -> list[Segment]:
+        # pywhispercpp по пути открывает только WAV — декодим любой формат через
+        # ffmpeg в float32 16 кГц моно и передаём готовый numpy-массив.
+        audio = whisperx.load_audio(audio_path)
+        segments = self._model.transcribe(audio, language="ru")
+        return [
+            Segment(start=s.t0 / 100.0, end=s.t1 / 100.0, text=s.text.strip())
+            for s in segments
+        ]

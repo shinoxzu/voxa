@@ -9,6 +9,7 @@ dependencies = [
     "asyncpg",
     "python-multipart",
     "whisperx==3.8.5",
+    "pywhispercpp",
     "pydantic-ai",
     "httpx",
     "pydantic-settings",

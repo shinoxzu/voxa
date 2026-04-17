@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     whisper_device: str = "cpu"
     whisper_compute_type: str = "int8"
 
+    diarizer_device: str = "cpu"
+
     hf_token: str = ""
 
     openrouter_llm_model: str = ""

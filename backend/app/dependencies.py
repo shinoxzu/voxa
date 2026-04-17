@@ -13,7 +13,7 @@ from app.services.analyzer import Analyzer, PydanticAIAnalyzer
 from app.services.diarizer import Diarizer, PyAnnoteDiarizer
 from app.services.processor import MeetingProcessor
 from app.services.tracker import Tracker, YandexTracker
-from app.services.transcriber import Transcriber, WhisperXTranscriber
+from app.services.transcriber import Transcriber, WhisperCppTranscriber
 
 
 class AppProvider(Provider):
@@ -33,7 +33,7 @@ class AppProvider(Provider):
 
     @provide(scope=Scope.APP)
     def get_transcriber(self, settings: Settings) -> Transcriber:
-        return WhisperXTranscriber(settings)
+        return WhisperCppTranscriber(settings)
 
     @provide(scope=Scope.APP)
     def get_diarizer(self, settings: Settings) -> Diarizer:
