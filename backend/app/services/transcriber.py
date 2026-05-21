@@ -67,7 +67,16 @@ class WhisperCppTranscriber(Transcriber):
         # pywhispercpp по пути открывает только WAV — декодим любой формат через
         # ffmpeg в float32 16 кГц моно и передаём готовый numpy-массив.
         audio = whisperx.load_audio(audio_path)
-        segments = self._model.transcribe(audio, language="ru")
+        segments = self._model.transcribe(
+            audio,
+            language="ru",
+            # анти-галлюцинационные пороги: на тишине/шуме whisper любит
+            # дорисовывать "спасибо за просмотр" и т.п. — отсекаем по
+            # вероятности речи и логлайкелихуду.
+            no_speech_thold=0.6,
+            logprob_thold=-1.0,
+            suppress_nst=True,
+        )   
         return [
             Segment(start=s.t0 / 100.0, end=s.t1 / 100.0, text=s.text.strip())
             for s in segments
