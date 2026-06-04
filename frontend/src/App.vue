@@ -22,15 +22,16 @@ import { RouterLink, RouterView } from "vue-router";
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--surface-b);
+  background-color: var(--p-content-background);
 }
 
 .app-nav {
   display: flex;
   align-items: center;
   padding: 12px 24px;
-  background-color: var(--p-surface-900);
-  border-bottom: 1px solid var(--p-surface-700);
+  background-color: var(--p-content-background);
+  border-bottom: 1px solid var(--p-content-border-color);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   gap: 24px;
 }
 

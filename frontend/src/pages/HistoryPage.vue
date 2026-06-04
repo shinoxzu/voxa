@@ -100,14 +100,16 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 14px 16px;
-  background: var(--p-surface-900);
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
   border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .meeting-row:hover {
-  background: var(--p-surface-800);
+  background: var(--p-content-hover-background);
 }
 
 .meeting-info {

@@ -159,8 +159,10 @@ h2 {
 }
 
 .section {
-  background: var(--p-surface-900);
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
   border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   padding: 20px;
 }
 
@@ -188,7 +190,7 @@ h2 {
 .divider::after {
   content: "";
   flex: 1;
-  border-top: 1px solid var(--p-surface-600);
+  border-top: 1px solid var(--p-content-border-color);
 }
 
 .upload-area {

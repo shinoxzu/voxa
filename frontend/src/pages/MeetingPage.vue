@@ -213,19 +213,22 @@ h1 {
 
 .processing-card,
 .error-card {
-  background: var(--p-surface-900);
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
   border-radius: 8px;
   padding: 24px;
   margin-bottom: 20px;
 }
 
 .error-card {
-  border: 1px solid var(--p-red-500);
+  border-color: var(--p-red-500);
 }
 
 .result-card {
-  background: var(--p-surface-900);
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
   border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   padding: 20px;
   margin-bottom: 16px;
 }
@@ -257,7 +260,7 @@ h2 {
   align-items: center;
   padding: 10px 12px;
   border-radius: 6px;
-  background: var(--p-surface-800);
+  background: var(--p-content-hover-background);
   gap: 12px;
 }
 
